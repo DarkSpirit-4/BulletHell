@@ -1,4 +1,7 @@
 #include "Core/GameObject.h"
+#include "Core/Scene.h"         // <--- AJOUTE CET INCLUDE
+#include "Engine.h"             // <--- AJOUTE CET INCLUDE
+#include "Modules/SceneModule.h" // <--- AJOUTE CET INCLUDE (pour trouver la scène)
 
 GameObject::~GameObject()
 {
@@ -124,9 +127,17 @@ void GameObject::OnDisable() const
 
 void GameObject::Destroy() const
 {
+    // 1. On prévient les composants (ton code actuel)
     for (Component* const& component : components)
     {
         component->Destroy();
+    }
+
+    // 2. ON PRÉVIENT LA SCÈNE ! (Le chaînon manquant)
+    auto* sm = Engine::GetInstance()->GetModuleManager()->GetModule<SceneModule>();
+    if (sm && !sm->GetScenesList().empty()) {
+        Scene* currentScene = sm->GetScenesList().front().get();
+        currentScene->DestroyGameObject(this);
     }
 }
 

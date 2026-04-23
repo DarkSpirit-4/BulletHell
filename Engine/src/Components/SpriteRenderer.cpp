@@ -1,4 +1,5 @@
 #include "Components/SpriteRenderer.h"
+#include "Components/SquareCollider.h"
 
 SpriteRenderer::SpriteRenderer(Texture* _texture)
 {
@@ -17,6 +18,15 @@ void SpriteRenderer::Render(sf::RenderWindow* _window)
     sf::Sprite sprite(texture->GetTexture());
 
     sprite.setTextureRect(rect);
+
+    // TEMP : Affichage de la hitbox si elle existe
+    auto* col = GetOwner()->GetComponent<SquareCollider>();
+    if (col) {
+        col->DebugRender(_window);
+    }
+
+    // --- APPLIQUER LA COULEUR ICI ---
+    sprite.setColor(color);
 
     // --- PIVOT CENTER ---
     sf::Vector2f size = static_cast<sf::Vector2f>(texture->GetTexture().getSize());

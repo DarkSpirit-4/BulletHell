@@ -15,7 +15,7 @@ public:
 
     void Awake() const;
     void Start() const;
-    void Update(float _delta_time) const;
+    void Update(float _delta_time);
 
     void PreRender() const;
     void Render(sf::RenderWindow* _window) const;
@@ -50,10 +50,18 @@ public:
 
 private:
     std::string name;
+
+    // La liste principale
     std::vector<std::unique_ptr<GameObject>> gameObjects;
 
-    bool enabled = true;
+    // --- LES NOUVELLES LISTES DE SÉCURITÉ ---
+    // Objets en attente de création (pour la frame suivante)
+    std::vector<std::unique_ptr<GameObject>> pendingObjects;
 
+    // Objets en attente de suppression
+    std::vector<const GameObject*> objectsToDestroy;
+
+    bool enabled = true;
     bool markedForDeletion = false;
 };
 

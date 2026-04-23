@@ -31,5 +31,7 @@ public:
         height = _height;
     }
 
+    void DebugRender(sf::RenderWindow* _window); //ajout
+
     static bool IsColliding(const SquareCollider& _collider_a, const SquareCollider& _collider_b);
 };

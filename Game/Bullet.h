@@ -1,15 +1,17 @@
 #pragma once
-
 #include "Core/Component.h"
 #include "Maths/Vector2.h"
 
-class Bullet : public Component
-{
+class Bullet : public Component {
 public:
-    Maths::Vector2f direction = Maths::Vector2f::Zero;
-    float speed = 400.f;
-    float lifeTime = 2.f;
-    float timer = 0.f;
+    // Ces variables sont configurées par Shooter.cpp ou BulletManager.cpp
+    Maths::Vector2f direction;
+    float speed = 300.0f;
+    bool isEnemy = false;
 
-    void Update(float dt) override;
+    void Update(float deltaTime) override;
+
+private:
+    float lifetime = 0.0f;
+    const float maxLifetime = 5.0f;
 };
