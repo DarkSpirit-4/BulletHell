@@ -4,6 +4,7 @@
 #include "Core/GameObject.h"
 #include "Engine.h"
 #include "Modules/SceneModule.h"
+#include "Core/Scene.h" // Ajouté pour accéder à DestroyGameObject
 
 void Bullet::Update(float deltaTime) {
     GameObject* owner = GetOwner();
@@ -12,16 +13,15 @@ void Bullet::Update(float deltaTime) {
     // 1. Déplacement
     owner->SetPosition(owner->GetPosition() + (direction * speed * deltaTime));
 
-    // 2. Récupération du Collider de la balle
-    auto* myCollider = owner->GetComponent<SquareCollider>();
-    if (!myCollider) return;
-
+    // 2. Récupération des modules et de la scène
     auto* sm = Engine::GetInstance()->GetModuleManager()->GetModule<SceneModule>();
     if (!sm) return;
 
-    // On cible la scène de combat spécifiquement
     Scene* scene = sm->GetSceneByName("BulletHell");
     if (!scene) return;
+
+    auto* myCollider = owner->GetComponent<SquareCollider>();
+    if (!myCollider) return;
 
     // 3. Détection de collision
     if (this->isEnemy) {
@@ -32,7 +32,9 @@ void Bullet::Update(float deltaTime) {
             if (playerCol && SquareCollider::IsColliding(*myCollider, *playerCol)) {
                 auto* h = player->GetComponent<Health>();
                 if (h) h->TakeDamage(1);
-                owner->Destroy();
+
+                // Destruction explicite via la scène
+                scene->DestroyGameObject(owner);
                 return;
             }
         }
@@ -41,34 +43,28 @@ void Bullet::Update(float deltaTime) {
         // --- LOGIQUE DES TIRS DU JOUEUR (Joueur -> Ennemis) ---
         for (const auto& obj : scene->GetGameObjects()) {
 
-            // FILTRE : On ignore tout ce qui n'est pas un "Enemy"
             if (obj->GetName() != "Enemy" || obj.get() == owner) continue;
 
             auto* targetCol = obj->GetComponent<SquareCollider>();
-            if (targetCol) {
-                // Vérification physique de l'intersection
-                if (SquareCollider::IsColliding(*myCollider, *targetCol)) {
+            if (targetCol && SquareCollider::IsColliding(*myCollider, *targetCol)) {
 
-                    // LOG DE DEBUG : Apparaîtra dans ta console au moment de l'impact
-                    Logger::Log(ELogLevel::Info, "Collision : Balle du joueur a touche un Enemy !");
-
-                    auto* h = obj->GetComponent<Health>();
-                    if (h) {
-                        h->TakeDamage(1);
-                        Logger::Log(ELogLevel::Debug, "Vie de l'ennemi : {}", h->currentHealth);
-                    }
-
-                    // Destruction de la balle
-                    owner->Destroy();
-                    return;
+                auto* h = obj->GetComponent<Health>();
+                if (h) {
+                    h->TakeDamage(1);
+                    Logger::Log(ELogLevel::Debug, "Impact! Vie de l'ennemi : {}", h->currentHealth);
                 }
+
+                // Destruction explicite via la scène
+                scene->DestroyGameObject(owner);
+                return;
             }
         }
     }
 
-    // 4. Auto-destruction (Si la balle ne touche rien)
+    // 4. Auto-destruction (Si la balle ne touche rien après 5s)
     lifetime += deltaTime;
     if (lifetime > 5.0f) {
-        owner->Destroy();
+        scene->DestroyGameObject(owner);
+        return;
     }
 }

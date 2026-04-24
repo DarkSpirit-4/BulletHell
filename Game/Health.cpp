@@ -1,7 +1,9 @@
 #include "Health.h"
 #include "Core/GameObject.h"
 #include "Engine.h"
-#include "Components/SpriteRenderer.h" // Vérifie bien le chemin de l'include
+#include "Components/SpriteRenderer.h"
+#include "Modules/SceneModule.h" // Ajout indispensable
+#include "Core/Scene.h"           // Ajout indispensable
 #include <iostream>
 
 void Health::Update(float _deltaTime)
@@ -30,13 +32,11 @@ void Health::Update(float _deltaTime)
 
 void Health::TakeDamage(int _amount)
 {
-    // 1. Sécurité Invulnérabilité
     if (isInvulnerable) return;
 
     currentHealth -= _amount;
     std::cout << GetOwner()->GetName() << " blesse ! Vie : " << currentHealth << std::endl;
 
-    // 2. Vérification de la mort
     if (currentHealth <= 0)
     {
         if (GetOwner()->GetName() == "Player")
@@ -46,14 +46,25 @@ void Health::TakeDamage(int _amount)
         }
         else
         {
-            // L'ennemi disparaît enfin
+            // --- DESTRUCTION PAR AUTORITÉ ---
+            auto* sm = Engine::GetInstance()->GetModuleManager()->GetModule<SceneModule>();
+            if (sm)
+            {
+                Scene* scene = sm->GetSceneByName("BulletHell");
+                if (scene)
+                {
+                    std::cout << "Mort de l'ennemi confirmee dans BulletHell" << std::endl;
+                    scene->DestroyGameObject(GetOwner());
+                    return;
+                }
+            }
+
+            // Sécurité au cas où la scène n'est pas trouvée
             GetOwner()->Destroy();
         }
-        return; // On arrête la fonction ici si l'objet est mort
+        return;
     }
 
-    // 3. Application de l'invulnérabilité UNIQUEMENT pour le Player
-    // On ne veut pas que les ennemis soient invulnérables, sinon on ne peut pas les "spammer" de balles
     if (GetOwner()->GetName() == "Player")
     {
         isInvulnerable = true;

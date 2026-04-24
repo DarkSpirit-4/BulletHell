@@ -88,9 +88,25 @@ void LaserTrap::Update(float _deltaTime)
     }
 
     // --- 3. DESTRUCTION AUTOMATIQUE ---
-    // Cette condition est vérifiée à CHAQUE frame, quoi qu'il arrive.
     if (timer >= (warningDuration + activeDuration))
     {
+        // 1. Récupérer le module de scène
+        auto* sm = Engine::GetInstance()->GetModuleManager()->GetModule<SceneModule>();
+        if (sm)
+        {
+            // 2. Récupérer la scène active (ici nommée "BulletHell")
+            Scene* scene = sm->GetSceneByName("BulletHell");
+            if (scene)
+            {
+                // On demande à la scène de supprimer cet objet spécifique
+                scene->DestroyGameObject(owner);
+                return; // On arrête l'Update ici
+            }
+        }
+
+        // Si la méthode ci-dessus n'existe pas dans ton moteur, 
+        // utilise simplement la méthode standard :
         owner->Destroy();
+   
     }
 }

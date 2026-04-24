@@ -1,6 +1,6 @@
 #pragma once
 #include "Core/Component.h"
-#include "Modules/InputModule.h" // Vérifie le chemin vers InputModule
+#include "Modules/InputModule.h"
 #include "Engine.h"
 #include "Modules/SceneModule.h"
 #include "Core/Scene.h"
@@ -14,15 +14,11 @@ public:
         auto* sm = Engine::GetInstance()->GetModuleManager()->GetModule<SceneModule>();
         if (!sm) return;
 
-        // CORRECTION 1 : Utilise KeyDown (ou équivalent) pour éviter de déclencher 
-        // le changement 60 fois par seconde si tu restes appuyé.
         if (InputModule::GetKey(sf::Keyboard::Key::A))
         {
             LaunchGame(sm, "BulletHell");
         }
 
-        // CORRECTION 2 : Attention au ";" après le if ! 
-        // Ton code original avait un ";" qui lançait le TowerDefense instantanément.
         if (InputModule::GetKey(sf::Keyboard::Key::Z))
         {
             LaunchGame(sm, "TowerDefense");

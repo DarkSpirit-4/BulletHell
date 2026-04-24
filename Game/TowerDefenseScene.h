@@ -1,12 +1,30 @@
-#pragma once
-#include "Core/Scene.h"
+#ifndef TOWERDEFENSESCENE_H
+#define TOWERDEFENSESCENE_H
 
-class TowerDefenseScene final : public Scene
+#include "Core/Scene.h"
+#include "TurretT.h"
+
+class TowerDefenseScene : public Scene
 {
 public:
-    // Le constructeur doit être identique en structure à BulletHellScene
-    TowerDefenseScene() : Scene("TowerDefense", false)
-    {
-        // On laisse vide pour l'instant, mais la structure est là
-    }
+    // Constructeur
+    TowerDefenseScene();
+
+    virtual ~TowerDefenseScene() = default;
+
+    // Cycle de vie
+    void Update(const float _delta_time) override;
+
+    void InitScene();
+
+private:
+
+    void HandlePlacement();
+
+    bool m_isInitialized = false;
+    bool m_isHoldingTurret = false;
+
+    TurretType m_selectedType = TurretType::BASIC;
 };
+
+#endif

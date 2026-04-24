@@ -8,17 +8,19 @@
 
 void Asteroid::Update(float dt)
 {
-    // 1. Déplacement
-    auto pos = GetOwner()->GetPosition();
-    pos.y += speed * dt;
-    GetOwner()->SetPosition(pos);
+    GameObject* owner = GetOwner();
+    if (!owner) return;
 
-    // 2. Récupération sécurisée de la scène par son nom
+    // 1. Déplacement
+    auto pos = owner->GetPosition();
+    pos.y += speed * dt;
+    owner->SetPosition(pos);
+
+    // 2. Récupération sécurisée de la scène
     auto* mm = Engine::GetInstance()->GetModuleManager();
     auto* sceneModule = mm->GetModule<SceneModule>();
     if (!sceneModule) return;
 
-    // On cible spécifiquement la scène de jeu "BulletHell"
     Scene* scene = sceneModule->GetSceneByName("BulletHell");
     if (!scene) return;
 
@@ -27,23 +29,24 @@ void Asteroid::Update(float dt)
     if (player)
     {
         auto* playerCol = player->GetComponent<SquareCollider>();
-        auto* myCol = GetOwner()->GetComponent<SquareCollider>();
+        auto* myCol = owner->GetComponent<SquareCollider>();
 
         if (playerCol && myCol && SquareCollider::IsColliding(*myCol, *playerCol))
         {
-            // ? UTILISE TakeDamage pour respecter l'invulnérabilité
             auto* hp = player->GetComponent<Health>();
             if (hp) hp->TakeDamage(1);
 
-            // Détruire l'astéroïde après l'impact
-            GetOwner()->Destroy();
-            return; // On sort pour éviter de tester le "hors écran" sur un objet mort
+            // CORRECTION : Destruction via l'autorité de la scène
+            scene->DestroyGameObject(owner);
+            return;
         }
     }
 
-    // 4. Destruction si hors écran (optimisation)
-    if (pos.y > 1000.f) // Ajusté à 800 pour être sûr qu'il soit bien sorti
+    // 4. Destruction si hors écran
+    if (pos.y > 1000.f)
     {
-        GetOwner()->Destroy();
+        // CORRECTION : Destruction via l'autorité de la scène
+        scene->DestroyGameObject(owner);
+        return;
     }
 }

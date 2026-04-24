@@ -15,7 +15,7 @@ public:
 
     void Awake() const;
     void Start() const;
-    void Update(float _delta_time);
+    virtual void Update(const float _delta_time);
 
     void PreRender() const;
     void Render(sf::RenderWindow* _window) const;

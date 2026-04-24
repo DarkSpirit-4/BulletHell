@@ -6,7 +6,7 @@ class Bullet : public Component {
 public:
     // Ces variables sont configurées par Shooter.cpp ou BulletManager.cpp
     Maths::Vector2f direction;
-    float speed = 300.0f;
+    float speed = 250.0f;
     bool isEnemy = false;
 
     void Update(float deltaTime) override;

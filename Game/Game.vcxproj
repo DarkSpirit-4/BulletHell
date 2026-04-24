@@ -97,40 +97,51 @@
   <ItemGroup>
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="AsteroidSpawner.cpp" />
+    <ClCompile Include="BaseT.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletHellSpawner.cpp" />
     <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="EnemyShooter.cpp" />
+    <ClCompile Include="EnemySpawnerT.cpp" />
+    <ClCompile Include="EnemyT.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="LaserTrap.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapRenderer.cpp" />
     <ClCompile Include="Shooter.cpp" />
     <ClCompile Include="TowerDefenseScene.cpp" />
+    <ClCompile Include="TurretT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="AsteroidSpawner.h" />
+    <ClInclude Include="BaseT.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletHellSpawner.h" />
     <ClInclude Include="BulletManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="EnemyShooter.h" />
+    <ClInclude Include="EnemySpawnerT.h" />
+    <ClInclude Include="EnemyT.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="HealthBar.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="LaserTrap.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MapData.h" />
+    <ClInclude Include="MapRenderer.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scenes\DefaultScene.h" />
     <ClInclude Include="Shooter.h" />
     <ClInclude Include="TowerDefenseScene.h" />
+    <ClInclude Include="TurretT.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
