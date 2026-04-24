@@ -101,6 +101,8 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletHellSpawner.cpp" />
     <ClCompile Include="BulletManager.cpp" />
+    <ClCompile Include="ClickerLogic.cpp" />
+    <ClCompile Include="ClickerScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="EnemyShooter.cpp" />
@@ -123,6 +125,8 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletHellSpawner.h" />
     <ClInclude Include="BulletManager.h" />
+    <ClInclude Include="ClickerLogic.h" />
+    <ClInclude Include="ClickerScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="EnemyShooter.h" />

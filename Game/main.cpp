@@ -4,6 +4,7 @@
 #include "MenuScene.h"
 #include "Scenes/DefaultScene.h"
 #include "TowerDefenseScene.h"
+#include "ClickerScene.h"
 
 int main(const int _argc, const char** _argv)
 {
@@ -15,6 +16,7 @@ int main(const int _argc, const char** _argv)
     sm->CreateScene<MenuScene>();
     sm->CreateScene<BulletHellScene>();
     sm->CreateScene<TowerDefenseScene>();
+    sm->CreateScene<ClickerScene>();
 
     engine->Run();
     return 0;

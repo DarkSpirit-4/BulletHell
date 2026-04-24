@@ -23,6 +23,11 @@ public:
         {
             LaunchGame(sm, "TowerDefense");
         }
+
+        if (InputModule::GetKey(sf::Keyboard::Key::E))
+        {
+            LaunchGame(sm, "ClickerScene");
+        }
     }
 
 private:

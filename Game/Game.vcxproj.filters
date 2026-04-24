@@ -19,6 +19,12 @@
     <Filter Include="Header Files\BulletHell">
       <UniqueIdentifier>{c638b21a-c940-41c1-8536-01a49aa001d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\TowerDefense">
+      <UniqueIdentifier>{04da0be4-e4b0-43fb-bfd1-d0679e9026c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TowerDefense">
+      <UniqueIdentifier>{13368fa9-39ed-4caf-a4c6-2fc1b38b14fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,22 +69,28 @@
     <ClCompile Include="LaserTrap.cpp">
       <Filter>Source Files\BulletHell</Filter>
     </ClCompile>
-    <ClCompile Include="MapRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyT.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemySpawnerT.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TurretT.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TowerDefenseScene.cpp">
+    <ClCompile Include="ClickerScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BaseT.cpp">
+      <Filter>Source Files\TowerDefense</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpawnerT.cpp">
+      <Filter>Source Files\TowerDefense</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyT.cpp">
+      <Filter>Source Files\TowerDefense</Filter>
+    </ClCompile>
+    <ClCompile Include="MapRenderer.cpp">
+      <Filter>Source Files\TowerDefense</Filter>
+    </ClCompile>
+    <ClCompile Include="TowerDefenseScene.cpp">
+      <Filter>Source Files\TowerDefense</Filter>
+    </ClCompile>
+    <ClCompile Include="TurretT.cpp">
+      <Filter>Source Files\TowerDefense</Filter>
+    </ClCompile>
+    <ClCompile Include="ClickerLogic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,13 +101,7 @@
     <ClInclude Include="MainMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TowerDefenseScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MenuScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MapData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Asteroid.h">
@@ -143,19 +149,31 @@
     <ClInclude Include="Shooter.h">
       <Filter>Header Files\BulletHell</Filter>
     </ClInclude>
-    <ClInclude Include="MapRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyT.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemySpawnerT.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TurretT.h">
+    <ClInclude Include="ClickerScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BaseT.h">
+      <Filter>Header Files\TowerDefense</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawnerT.h">
+      <Filter>Header Files\TowerDefense</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyT.h">
+      <Filter>Header Files\TowerDefense</Filter>
+    </ClInclude>
+    <ClInclude Include="MapData.h">
+      <Filter>Header Files\TowerDefense</Filter>
+    </ClInclude>
+    <ClInclude Include="MapRenderer.h">
+      <Filter>Header Files\TowerDefense</Filter>
+    </ClInclude>
+    <ClInclude Include="TowerDefenseScene.h">
+      <Filter>Header Files\TowerDefense</Filter>
+    </ClInclude>
+    <ClInclude Include="TurretT.h">
+      <Filter>Header Files\TowerDefense</Filter>
+    </ClInclude>
+    <ClInclude Include="ClickerLogic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
